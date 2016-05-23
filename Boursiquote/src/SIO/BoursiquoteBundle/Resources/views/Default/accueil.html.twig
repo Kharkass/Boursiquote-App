@@ -1,0 +1,30 @@
+{% extends "SIOBoursiquoteBundle:Default:layout.html.twig" %}
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <center><div class="flashnotice">
+            {{ flashMessage }}
+        </div></center>
+    {% endfor %}
+    <div class="site"><div class="span4 offset4 login-inputs">
+    <div id="ConnexionClient">
+        <center><form name="connexion" method="POST">
+                <br>
+                <Legend><h2>Espace Client</h2></Legend>
+                <p>
+                    <input id="mail" type="text" name="mail" placeholder="E-Mail Client" style="height:35px;"/></br>
+                </p>
+                <p>
+                    <input id="mdp" type="password" name="mdp" placeholder="Mot de Passe"  style="height:35px;"/>
+                </p>
+                <p>
+                    <input type="submit" value="Valider" name="submit" class="btn">
+                </p>
+                <p>Pas encore Inscrit ?</p>
+                <p>
+                    <input type="submit" value="Creer Compte" name="inscrire" class="btn">
+                </p>
+        </form></center>
+    </div>
+        </div>
+    </div>
+{% endblock %}

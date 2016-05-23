@@ -1,0 +1,43 @@
+{% extends "SIOBoursiquoteBundle:Default:layout.html.twig" %}
+{%	block title	%} {{parent()}} - Nouveau Compte client {%	endblock %}
+
+{% block content %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash notice">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+<div class="site"><div class="span4 offset4 login-inputs">
+    <div id="creationClient"><center>
+        <form name="nouveau" method="POST"><center><br>
+                <Legend><h2>Nouveau Client</h2></legend>
+                <p>
+                    <input id ="nom" type="text" name="nom" placeholder="Nom Client">
+                </p>
+                <p>
+                    <input id ="prenom" type="text" name="prenom" placeholder="Prenom Client">
+                </p>
+                <p>
+                    <input id ="mail" type="text" name="mail" placeholder="E-Mail Client">
+                </p>
+                <p>
+                    <input id ="telephone" type="text" name="telephone" placeholder="Telephone Client">
+                </p>
+                <p>
+                    <input id ="mdp" type="text" name="mdp" placeholder="Mot De Passe Client">
+                </p>
+                <p>
+                    <input type="submit" value="M'Inscrire !" name="submit" class="btn">
+                </p>
+            </center></form></center>
+        <center><form>
+            <input type="button" value="&lArr; Retour"  class="btn" onclick="history.go(-1)">
+        </form></center>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+
+		
+		
+		

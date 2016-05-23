@@ -1,0 +1,21 @@
+sio_boursiquote_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: SIOBoursiquoteBundle:Default:index }
+sio_boursiquote_accueil:
+    path:     /accueil
+    defaults: { _controller: SIOBoursiquoteBundle:Default:accueil}
+sio_boursiquote_inscription:
+    path:     /inscription
+    defaults: { _controller: SIOBoursiquoteBundle:Default:inscription}
+sio_boursiquote_tableau:
+    path:     /tableau
+    defaults: { _controller: SIOBoursiquoteBundle:Default:tableau}
+sio_boursiquote_afficher:
+    path:     /tableau/afficher/
+    defaults: { _controller: SIOBoursiquoteBundle:Default:afficher}
+sio_boursiquote_detail:
+    path:     /detail
+    defaults: { _controller: SIOBoursiquoteBundle:Default:detail}
+sio_boursiquote_fav:
+    path:    /fav
+    defaults: { _controller: SIOBoursiquoteBundle:Default:fav}

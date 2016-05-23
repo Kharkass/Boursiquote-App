@@ -1,0 +1,54 @@
+{% extends "SIOBoursiquoteBundle:Default:layout.html.twig" %}
+{% block content %}
+<div class="span4 offset4 tableau">
+   <form id="tableau" method="POST">
+<center><br>
+<h1>Tableau des Actions</h1>
+    <input type="submit" name="fav" value="Mes favoris" class="btn">
+    <div class="datagrid">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <center><div class="flashnotice">
+                    {{ flashMessage }}
+                </div></center>
+        {% endfor %}
+<table border="1" name="tableau"><br>
+<tr>
+        <td><b>Symbole</b></td>
+        <td><b>Nom</b></td>
+        <td><b>Echange</b></td>
+        <td><b>Echange affichage</b></td>
+        <td><b>Type</b></td>
+        <td><b>Type affichage</b></td>
+        <td><b>Details</b></td>
+        <td><b>Favoris</b></td>
+</tr>
+ {% for d in data %}
+
+     <tr class="recherche">
+         <td class="recherche">{{ d.symbol }}</td>
+         <td class="recherche">{{ d.name }}</td>
+         <td class="recherche">{{ d.exch }}</td>
+         <td class="recherche">{{ d.exchDisp }}</td>
+         <td class="recherche">{{ d.type }}</td>
+         <td class="recherche">{{ d.typeDisp }}</td>
+         <td class="recherche"><form id="tableau2" method="POST"><input type="hidden" name="symbol_cacher" value={{ d.symbol }}>    <select name="graphique" class="selectoption">
+                     <option>7jours</option>
+                     <option>30jours</option>
+                     <option>3mois</option>
+                     <option>6mois</option>
+                     <option>1an</option>
+                 </select><input type="submit" name="rechercheS" value="Afficher Details" class="btn"></form></td>
+         <td class="recherche"><form id="tableau3" method="POST"><input type="hidden" name="symbol_cacher" value={{ d.symbol }}><input type="hidden" name="nom_cache" value={{ d.name }}><input type="submit" name="addFav" value="+" class="btn"></form></td>
+     </tr>
+
+    {% endfor %}
+</table>
+</div><br>
+<br><br><br>
+    <form id="tableau" method="POST">
+<input type="text" name="nom" placeholder="Nom de l'Action" class="btn">
+<input type="submit" name="recherche" value="RECHERCHER" class="btn"><br>
+</center>
+</form>
+</div>
+{% endblock %}

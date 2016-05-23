@@ -1,0 +1,41 @@
+{% extends "SIOBoursiquoteBundle:Default:layout.html.twig" %}
+{% block content %}
+    <div class="span4 offset4 tableau">
+        <form id="tableau" method="POST">
+            <center><br>
+                <h1>Tableau de mes Favoris</h1>
+                <h3>Liste des symboles en favoris</h3>
+                <div class="datagrid">
+
+                    <table border="1" name="tableau">
+                        <tr height=50px>
+                            <td><b>Symboles</b></td>
+                            <td><b>Nom de l'Action</b></td>
+                            <td><b>Details</b></td>
+                            <td><b>Retirer des Favoris</b></td>
+                        </tr>
+                        {% for s in lesSymboles %}
+                        <tr>
+                            <td><b>{{ s.SymbolAction }}</b></td>
+                            <td><b>{{ s.NomAction }}</b></td>
+                            <td class="recherche"><form id="tableau" method="POST"><input type="hidden" name="symbol_cacher" value={{ s.SymbolAction }}><input type="submit" name="rechercheS" value="Afficher Details" class="btn">    <select name="graphique" class="selectoption">
+                                        <option>7jours</option>
+                                        <option>30jours</option>
+                                        <option>3mois</option>
+                                        <option>6mois</option>
+                                        <option>1an</option>
+                                    </select></form></td>
+                            <td class="recherche"><input type="hidden" name="symbol_cacher" value={{ s.SymbolAction }}><input type="submit" name="SupFav" value="Retirer" class="btn"></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+                </div><br>
+                <form>
+                    <input type="button" value="&lArr; Retour"  class="btn" onclick="history.go(-1)">
+                </form>
+                <br><br><br>
+            </center>
+        </form>
+    </div>
+{% endblock %}

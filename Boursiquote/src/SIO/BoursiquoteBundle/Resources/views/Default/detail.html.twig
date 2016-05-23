@@ -1,0 +1,117 @@
+{% extends "SIOBoursiquoteBundle:Default:layout.html.twig" %}
+
+{% block content %}
+<div class="tableau-detail">
+    {% for d in data %}
+    <center><br><h1>Details de l'action: {{ d.Symbol }}</h1><br>
+<table border="1" name="tableau">
+<tr>
+        <th><b></b></th>
+        <th><b>Dernier prix d'echange</b></th>
+        <th><b>Variations</b></th>
+        <th><b>Derniere date d'echange</b></th>
+</tr>
+
+     <tr class="recherche">
+         <td class="recherche">{% if d.ChangeinPercent < 0 %} <font color="red"><img src={{ asset('images/decente.png')  }}	alt="Bourser" title="Boursiquote"/>{% else %}<img src={{ asset('images/monte.png')  }}	alt="Bourser" title="Boursiquote"/>{% endif %}</td>
+         <td class="recherche">{{ d.LastTradePriceOnly }}</td>
+         <td class="recherche">{% if d.ChangeinPercent < 0 %} <font color="red">{{ d.ChangeinPercent }}</font>{% else %}<font color="green">{{ d.ChangeinPercent }}</font>{% endif %}</td>
+         <td class="recherche">{{ d.LastTradeDate }}</td>
+     </tr>
+
+    {% endfor %}
+
+</table><br>
+<h1>Graphique:</h1>
+        <script type="text/javascript">
+            var lesCategories = new Array();
+            var lesValeurs = new Array();
+            var lesValeursLow = new Array();
+            var lesValeursClose= new Array();
+            var lesValeursOuv= new Array();
+            var debut= '{{debut}}';
+            var fin='{{ fin }}';
+
+            {% for d in graph %}
+            lesCategories.push('{{ d.Date }}');
+            {% endfor %}
+
+            {% for d in valeurs %}
+            lesValeurs.push({{ d }})
+            {% endfor %}
+
+            {% for d in valeursLow %}
+            lesValeursLow.push({{ d }})
+            {% endfor %}
+
+            {% for d in valeursClose %}
+            lesValeursClose.push({{ d }})
+            {% endfor %}
+
+            {% for d in valeursOuv %}
+            lesValeursOuv.push({{ d }})
+            {% endfor %}
+
+            $(document).ready(function() {
+
+                $('#container').highcharts({
+                    title: {
+                        text: 'Evolution du cours de l\'action',
+                        x: -20 //center
+                    },
+                    subtitle: {
+                        text: 'Periode du : '+debut+' au '+ fin,
+                        x: -20
+                    },
+                    xAxis: {
+                        categories: lesCategories
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Cours de l\'action',
+                        },
+                        plotLines: [{
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    },
+                    tooltip: {
+                        valueSuffix: ' Points'
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+                        borderWidth: 0
+                    },
+                    series: [{
+                        name: 'Plus haut',
+                        data: lesValeurs
+                    },
+                        {
+                            name: 'Plus basse',
+                            data: lesValeursLow
+                        }, {
+                            name: 'Ouverture',
+                            data: lesValeursOuv
+                        }, {
+                            name: 'Fermeture',
+                            data: lesValeursClose
+                        }
+                    ]
+                });
+            });
+        </script>
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+        <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div><br>
+        <form>
+            <input type="button" value="&lArr; Retour"  class="btn" onclick="history.go(-1)">
+        </form>
+
+    </center>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+<html lang="fr">
+<head>
+
+    <title>
+        {% block title %}
+            Boursiquote Symfony 2
+        {% endblock %}
+
+
+
+
+    </title>
+    <meta http-equiv="Content-Language" content="fr">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    {% stylesheets '@SIOBoursiquoteBundle/public/css/cssGeneral.css' filter='cssrewrite' %}
+    <link href= "{{  asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}
+    <script src="{{ asset('js/analytics.js') }}"></script>
+    <script src="{{ asset('js/popup.js') }}"></script>
+    <script src="{{ asset('js/jquery-1.11.3.min.js') }}"></script>
+    <script src="{{ asset('js/raphael.js') }}"></script>
+
+</head>
+
+<body>
+
+<div id="bandeau">
+    <div class="logo"><img src={{ asset('images/bourse.png')  }}	alt="Bourser" title="Boursiquote"/></div>
+
+    {% block Deconnexion %}
+
+
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+
+</html>
